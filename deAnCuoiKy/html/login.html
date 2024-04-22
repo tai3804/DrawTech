@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrawTech - đăng nhập</title>
+    <link rel="icon" href="../img/header/icon.png" type="logo">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../bootstrap/js/jquery 3.7.1.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- my code -->
+    <link rel="stylesheet" href="../css/base.css">
+    <script src="../js/base.js"></script>
+    <script src="../js/account.js"></script>
+
+    <style>
+        .main {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--behind-modal);
+        }
+
+        .container {
+            width: 400px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="main d-flex align-items-center">
+        <div class="container border bg-white">
+            <div class="border-bottom p-2">
+                <a href="../html/index.html" title="home">
+                    <i class="fa fa-home float-start pt-3 text-dark" aria-hidden="true"></i>
+                </a>
+                <h1 class="text-center">Đăng Nhập</h1>
+            </div>
+            <form action="../php/signin.php" class="p-3">
+                <div class="form-group mb-2">
+                    <label for="user">Tên đăng nhập</label>
+                    <input type="text" class="form-control p-2 user__in" id="user" name="Tên đăng nhập">
+                    <div class="user__mess"></div>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="pass" id="">Mật khẩu</label>
+                    <input type="password" class="form-control p-2 pass__in" id="pass" name="Mật khẩu">
+                    <div class="pass__mess"></div>
+                </div>
+                <a href="../html/index.html" type="button" class="form-control btn btn-dark" onclick="check()">Đăng
+                    Nhập</a>
+                <div class="d-flex justify-content-between">
+                    <a href="../html/identify.html">Quên mật khẩu?</a>
+                    <a href="../html/signup.html">Đăng ký</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    function check() {
+        event.preventDefault();
+        const user = $('.user__in');
+        const pass = $('.pass__in');
+
+        const userMess = $('.user__mess');
+        const passMess = $('.pass__mess');
+
+        const phoneRegex = /^0[\d]{9}$/;
+        const userRegex = /^[a-zA-Z0-9]{6,}$/;
+        var acp = true;
+
+        if (!userRegex.test(user.val())) {
+            userMess.html('<sup class="text-danger">Tên đăng nhập phải từ 6 kí tự trở lên và không chứa kí tự đặc biệt!</sup>');
+            acp = false;
+        } else {
+            userMess.html('');
+        }
+
+
+        if (!checkRong(passMess, pass)) {
+            acp = false;
+        };
+
+        for (let acc in accountList) {
+            if (accountList[acc].username === user.val() && accountList[acc].password === pass.val()) {
+                localStorage.setItem('curUser', JSON.stringify(accountList[acc]));
+                localStorage.setItem('isLogin', true);
+                alert('Đăng nhập thành công');
+                window.location.href = '../html/index.html';
+                return true;
+            }
+        }
+
+        if (acp) {
+            alert('Sai tài khoản hoặc mật khẩu!');
+        }
+    }
+
+</script>
+
+</html>

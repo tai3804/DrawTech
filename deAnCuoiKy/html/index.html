@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DawnTech - Trang chủ</title>
+    <link rel="icon" href="../img/header/icon.png" type="logo">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../bootstrap/js/jquery 3.7.1.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- my code -->
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="../js/base.js"></script>
+    <script src="../js/product.js"></script>
+    <script src="../js/addProduct.js"></script>
+    <script src="../js/account.js"></script>
+    <script src="../js/detail.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid p-0 w-100 bg-light">
+        <!-- header -->
+        <header class=" border-1 bg-dark d-flex align-items-center justify-content-between">
+            <!-- product list -->
+            <div class="header__product-list text-light ms-4">
+                <a href="#" data-bs-toggle="collapse" data-bs-target="#modal__product-list"
+                    class="text-light product-list__link">
+                    <i class="fa-solid fa-list product-list__icon p-3 btn btn-dark text-light"></i>
+                </a>
+            </div>
+
+            <!-- logo -->
+            <div class="header__logo m-5">
+                <a href="#">
+                    <img src="../img/header/logo.png" alt="Dawn Tech logo" title="Dawn Tech Logo">
+                </a>
+            </div>
+
+            <!-- search -->
+            <div class="header__search col-md-4 m-5">
+                <div class="d-flex">
+                    <input type="text" placeholder="Tìm kiếm" class=" form-control" id="search__input" width="100%">
+                    <label for="search__input" class="search__icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </label>
+                </div>
+                <!-- product nav -->
+                <ul class="nav navbar-expand mt-2 ms-1">
+                    <li class="nav-item">
+                        <a href="../html/filter.html" class="nav-link text-light"
+                            onclick="setFilter('brand', 'apple')">Macbook</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../html/filter.html" class="nav-link text-light"
+                            onclick="setFilter('brand', 'lenovo')">Lenovo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../html/filter.html" class="nav-link text-light"
+                            onclick="setFilter('brand', 'asus')">Asus</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../html/filter.html" class="nav-link text-light"
+                            onclick="setFilter('brand', 'dell')">Dell</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../html/filter.html" class="nav-link text-light"
+                            onclick="setFilter('brand', 'msi')">MSI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../html/filter.html" class="nav-link text-light"
+                            onclick="setFilter('brand', 'hp')">HP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../html/filter.html" class="nav-link text-light"
+                            onclick="setFilter('brand', 'acer')">ACER</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- notification, cart-->
+            <div class="d-flex">
+                <!-- notification -->
+                <div class="header__notification">
+                    <a href="#" class="text-light notification__link  btn btn-dark">
+                        <i class="notification__icon fa-solid fa-bell p-3">
+                            <span class="badge bg-danger notification__noti"></span>
+                        </i>
+                    </a>
+
+                    <ul class="notification__box list-group">
+                        <li class=" list-group-item not-seen">
+                            <a href="#" class="text-dark">Đăng nhập thành công</a>
+                        </li>
+                        <li class="list-group-item bg-secondary-subtle">
+                            <a href="#">Xem them</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <!-- cart -->
+                <div class="header__cart">
+                    <a href="../html/cart.html" class="cart__link text-light btn btn-dark">
+                        <i class="cart__icon fa-solid fa-shopping-cart p-3">
+                            <span class="badge bg-danger cart__noti"></span>
+                        </i>
+                    </a>
+
+                    <div class="cart__box bg-white rounded border">
+                        <ul class="cart__list list-group"> </ul>
+                        <a href="../html/cart.html" class="p-2 d-block">Xem thêm</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- authentication -->
+            <div class="header__authentication ms-lg-5">
+                <a href="../html/login.html" class="btn btn-warning p-2 authentication__btn hide">Đăng nhập</a>
+                <a href="../html/signup.html" class="btn btn-outline-light p-2 authentication__btn hide">Đăng ký</a>
+                <div class="index-user__link d-flex align-items-center position-relative">
+                    <i class="index-user fa-regular fa-user border p-3 rounded-circle bg-white hide"></i>
+                    <div class="index-user index-user-name text-white ps-3 hide"></div>
+                </div>
+                <ul class="index-user__box list-group position-absolute">
+                    <li class="list-group-item bg-light">
+                        <a href="#" onclick="signOut()">Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- modal -->
+        <div id="modal__product-list" class="collapse">
+            <ul class="list-group ps-3">
+                <li class="apple row">
+                    <a href="../html/filter.html" class="apple-link modal__link right-pad list-group-item col-sm-2"
+                        onclick="setFilter('brand', 'apple')">
+                        <i class="fa-brands fa-apple"></i>
+                        Apple
+                    </a>
+                    <div class="modal__box apple__box list-group list-group-horizontal col-sm-10">
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary"
+                                    onclick="setFilter('brand', 'apple')">
+                                    <h4>Macbook</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Macbook Air</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Macbook Pro</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="#" class="text-primary">
+                                    <h4>Mac
+                                        PC</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">iMac</a>
+                            </li>
+                            <li>
+                                <a href="#">Mac mini</a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <a href="#" class="text-primary">
+                                    <h4>Phụ
+                                        kiện Apple</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">Apple Watch</a>
+                            </li>
+                            <li>
+                                <a href="#">Củ sạc & Cáp sạc</a>
+                            </li>
+                            <li>
+                                <a href="#">Tai nghe Apple</a>
+                            </li>
+                            <li>
+                                <a href="#">Bàn phím, chuột & bút</a>
+                            </li>
+                            <li>
+                                <a href="#">Apple TV</a>
+                            </li>
+                            <li>
+                                <a href="#">Airtag</a>
+                            </li>
+                            <li>
+                                <a href="#">Apple Care</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="laptop row">
+                    <a href="../html/filter.html" class="laptop-link modal__link right-pad list-group-item col-sm-2"
+                        onclick="setFilter('type', 'laptop')">
+                        <i class="fa-solid fa-laptop"></i>
+                        laptop
+                    </a>
+                    <div class="modal__box laptop__box list-group list-group-horizontal border col-sm-10">
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary"
+                                    onclick="setFilter('brand', 'lenovo')">
+                                    <h4>Lenovo</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Thinkpad</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">IdeaPad</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Legion</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary" onclick="setFilter('brand', 'asus')">
+                                    <h4>Asus</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Zenbook</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Vivobook</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">TUF Gaming</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">ROG</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary" onclick="setFilter('brand', 'dell')">
+                                    <h4>Dell</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">XPS</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Inspiron</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Vostro</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Alienware</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary" onclick="setFilter('brand', 'msi')">
+                                    <h4>MSI</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Creator</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Prestige</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Modern</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Gaming</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary" onclick="setFilter('brand', 'hp')">
+                                    <h4>HP</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Spectre</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Envy</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Pavilion</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Omen</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <a href="../html/filter.html" class="text-primary" onclick="setFilter('brand', 'acer')">
+                                <h4>ACER</h4>
+                            </a>
+                            <li>
+                                <a href="../html/filter.html">Swift</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Aspire</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Nitro</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Predator</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="pc row">
+                    <a href="../html/filter.html" class="pc-link modal__link right-pad list-group-item col-sm-2"
+                        onclick="setFilter('type', 'pc')">
+                        <i class="fa-solid fa-computer"></i>
+                        PC
+                    </a>
+                    <div class="modal__box pc__box list-group list-group-horizontal border col-sm-10">
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary">
+                                    <h4>PC theo hãng</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Lenovo</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Asus</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">DELL</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">MSI</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">HP</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">ACER</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary">
+                                    <h4>PC theo
+                                        nhu cầu</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">All-in-one</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Văn phòng</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Gaming</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Đồ hoạ</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Mini</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary">
+                                    <h4>PC theo
+                                        giá</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Dưới 10 triệu</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">từ 10-15 triệu</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">từ 15-25 triệu</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">từ 25-30 triệu</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">trên 30 triệu</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary">
+                                    <h4>PC theo
+                                        Chip</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Intel i3</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Intel i5</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Intel i7</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Intel i9</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">ryzen 3</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">ryzen 5</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">ryzen 7</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">ryzen 9</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </li>
+                <li class="screen row">
+                    <a href="../html/filter.html" class="screen-link modal__link right-pad list-group-item col-sm-2"
+                        onclick="setFilter('type', 'screen')">
+                        <i class="fa-solid fa-display"></i>
+                        Màn hình
+                    </a>
+                    <div class="modal__box screen__box list-group list-group-horizontal border col-sm-10">
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary">
+                                    <h4>Màn
+                                        hình theo hãng</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Lenovo</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Asus</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">DELL</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">MSI</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">HP</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">ACER</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">LG</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Samsung</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary">
+                                    <h4>Theo
+                                        tần số quét</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">60Hz</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">90Hz</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">120Hz</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">144Hz</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">165Hz</a>
+                            </li>
+
+                            <li>
+                                <a href="../html/filter.html">180Hz</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">240Hz</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary">
+                                    <h4>Màn
+                                        hình theo giá</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Dưới 5 triệu</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Từ 5-10 triệu</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Từ 10-15 triệu</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Từ 15-25 triệu</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Trên 25 triệu</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary">
+                                    <h4>Theo
+                                        kích cỡ</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Dưới 19 inch</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">19 inch</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">24 inch</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">27 inch</a>
+                            </li>
+                            <li>
+                                <a href>32 inch</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Trên 32 inch</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html"></a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html"></a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary">
+                                    <h4>Theo
+                                        nhu cầu</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Gaming</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Đồ hoạ</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Màn hình cong</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Văn phòng</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary">
+                                    <h4>Theo độ
+                                        phân giải</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">HD</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Full HD</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">2k QHD</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">4k UHD</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="e-component row">
+                    <a href="../html/filter.html"
+                        class="e-component-link modal__link right-pad list-group-item col-sm-2">
+                        <i class="fa-solid fa-microchip"></i>
+                        Linh kiện máy tính
+                    </a>
+                    <div class="modal__box e-component__box list-group list-group-horizontal border col-sm-10">
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary">
+                                    <h4>Case -
+                                        Thùng máy tính</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Cooler Master</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">SAMA</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">XIGMATEK</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Golden Field</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Deepcool</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">ACER</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">ANTEC</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">MIK</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <a href="../html/filter.html" class="text-primary">
+                                <h4>Mainboard</h4>
+                            </a>
+                            <li>
+                                <a href="../html/filter.html">LGA1200</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Z390</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">B365 </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">ATX</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Micro ATX</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Mini ITX</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <a href="../html/filter.html" class="text-primary">
+                                <h4>CPU Bộ vi
+                                    xử lý</h4>
+                            </a>
+                            <li>
+                                <a href="../html/filter.html">i3</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">i5</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">i7</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">i9</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">ryzen 3</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">ryzen 5</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">ryzen 7</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">ryzen 9</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary">
+                                    <h4>VGA
+                                        Card màn hình</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">GTX</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">AMD</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">NVIDIA</a>
+                            </li>
+                            <li class="mt-5">
+                                <a href="../html/filter.html" class="text-primary">
+                                    <h4>Tản
+                                        nhiệt</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Tản nhiệt nước</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Tản nhiệt khí</a>
+                            </li>
+                        </ul>
+
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <a href="../html/filter.html" class="text-primary">
+                                <h4>ROM ổ
+                                    cứng</h4>
+                            </a>
+                            <li>
+                                <a href="../html/filter.html">SSD</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">HDD</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Kingston</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Sam Sung</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Sandisk</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html" class="text-primary">
+                                    <h4 class="mt-4">PSU Nguồn PC</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Cooler Master</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Golden field</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <a href="../html/filter.html" class="text-primary">
+                                <h4>RAM</h4>
+                            </a>
+                            <li>
+                                <a href="../html/filter.html">DDR 5</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">DDR 4</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">4GB</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">8GB</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">16GB</a>
+                            </li>
+                            <li>
+                                <a href>32GB</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">64GB</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="accessory row">
+                    <a href="../html/filter.html" class="accessory-link modal__link right-pad list-group-item col-sm-2">
+                        <i class="fa-regular fa-keyboard"></i>
+                        Phụ kiện
+                    </a>
+                    <div class="modal__box accessory__box list-group list-group-horizontal border col-sm-10">
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary" onclick="setFilter('type', 'mouse')">
+                                    <h4>Chuột</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Asus</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Logitech</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Razer</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">AKKO</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Rapboo</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <a href="../html/filter.html" class="text-primary" onclick="setFilter('type', 'keyboard')">
+                                <h4>Bàn phím</h4>
+                            </a>
+                            <li>
+                                <a href="../html/filter.html">Rapboo</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Logitech</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">AKKO</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Razer</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Bàn phím cơ</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <a href="../html/filter.html" class="text-primary">
+                                <h4>Ghế gaming</h4>
+                            </a>
+                            <li>
+                                <a href="../html/filter.html">Lenovo</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Razer</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Warrior</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <a href="../html/filter.html" class="text-primary">
+                                <h4>Lót chuột</h4>
+                            </a>
+                            <li>
+                                <a href="../html/filter.html">Logitech</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Razer</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Razer</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Hình cute</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <a href="../html/filter.html" class="text-primary">
+                                <h4>Phụ kiện chung</h4>
+                            </a>
+                            <li>
+                                <a href="../html/filter.html">USB</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Loa</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Dây nối</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Đầu đọc thẻ</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Micro</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Webcam</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="sound row">
+                    <a href="../html/filter.html" class="sound-link modal__link right-pad list-group-item col-sm-2">
+                        <i class="fa-solid fa-headphones"></i>Thiết bị âm thanh
+                    </a>
+                    <div class="modal__box sound__box list-group list-group-horizontal border col-sm-10">
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <li>
+                                <a href="../html/filter.html" class="text-primary">
+                                    <h4>Loa</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Logitech</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">LG</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Sony</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">SoundMax</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Bose</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <a href="../html/filter.html" class="text-primary" onclick="setFilter('type', 'headphone')">
+                                <h4>Tai nghe</h4>
+                            </a>
+                            <li>
+                                <a href="../html/filter.html">SoundMax</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Logitech</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Sony</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Razer</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Xiaomi</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Hyper X</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group-item border-0 col-sm-2">
+                            <a href="../html/filter.html" class="text-primary">
+                                <h4>MicroPhone</h4>
+                            </a>
+                            <li>
+                                <a href="../html/filter.html">Salar</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">PKG</a>
+                            </li>
+                            <li>
+                                <a href="../html/filter.html">Hyper X</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- end header -->
+
+        <!-- content -->
+        <div class="b-block content">
+            <div class=" content__info ">
+                <nav class=" navbar navbar-expand navbar-light">
+                    <ul class="navbar-nav m-0">
+                        <li class="nav-item">
+                            <a class="nav-link content-nav" href="#">Trang Chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link content-nav" href="../html/filter.html">Sản Phẩm</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link content-nav" href="../html/aboutUs.html">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link content-nav" href="../html/aboutUs.html#contact">Liên Hệ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link content-nav border-0" href="../html/sitemap.html">Site Map</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="content__main">
+                    <!-- Carousel -->
+                    <div class="row">
+                        <div class="carousel slide col-sm-8" id="content__carousel" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#content__carousel" data-bs-slide-to="0"
+                                    class="active"></button>
+                                <button type="button" data-bs-target="#content__carousel" data-bs-slide-to="1"></button>
+                                <button type="button" data-bs-target="#content__carousel" data-bs-slide-to="2"></button>
+                                <button type="button" data-bs-target="#content__carousel" data-bs-slide-to="3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <a href="#">
+                                        <img src="../img/content/info/carousel1.webp" alt="Lap top OLED Rẻ nhất"
+                                            width="100%">
+                                    </a>
+                                </div>
+                                <div class="carousel-item">
+                                    <a href="#">
+                                        <img src="../img/content/info/carousel2.webp" alt="PC máy tính bộ" width="100%">
+                                    </a>
+                                </div>
+                                <div class="carousel-item">
+                                    <a href="#">
+                                        <img src="../img/content/info/carousel3.webp" alt="ROG" width="100%">
+                                    </a>
+                                </div>
+                                <div class="carousel-item">
+                                    <a href="#">
+                                        <img src="../img/content/info/carousel4.webp" alt width="100%" height="65%">
+                                    </a>
+                                </div>
+                            </div>
+                            <button type="button" class="carousel-control-prev" data-bs-target="#content__carousel"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button type="button" class="carousel-control-next" data-bs-target="#content__carousel"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                        <div class="col content__right">
+                            <div class="row">
+                                <img src="../img/content/info/laptop-gaming.webp" alt="DELL" width="100%" height="100%">
+                            </div>
+                            <div class="row mt-3">
+                                <img src="../img/content/info/project-vertival.webp" alt="core ultra" width="100%"
+                                    height="100%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main__item p-4 m-3 bg-body sale">
+                <a href="#" class="text-info">
+                    <div class="d-flex justify-content-between">
+                        <h1>
+                            <i class="fa-solid fa-bolt"></i>
+                            Flash Sale
+                            <span class="badge bg-info sale__hour"></span>
+                            <span class="badge bg-info sale__min"></span>
+                            <span class="badge bg-info sale__sec"></span>
+                        </h1>
+                        <a href="#">Xem tất cả</a>
+                    </div>
+                </a>
+                <ul class="sale nav nav-pills">
+                    <li class="nav-item">
+                        <a href="#laptop" class="nav-link active" data-bs-toggle="tab">Laptop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#pc" class="nav-link" data-bs-toggle="tab">PC</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#headphone" class="nav-link" data-bs-toggle="tab">Tai nghe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#keyboard" class="nav-link" data-bs-toggle="tab">Bàn phím</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#mouse" class="nav-link" data-bs-toggle="tab">Chuột</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#screen" class="nav-link" data-bs-toggle="tab">Màn hình</a>
+                    </li>
+                </ul>
+                <div class="sale tab-content position-relative">
+                    <div class="tab-pane pane__item row active" id="laptop">
+                        <div class="row laptop__row"></div>
+                    </div>
+                    <div class="tab-pane pane__item row" id="pc">
+                        <div class="pc__row row"></div>
+                    </div>
+                    <div class="tab-pane pane__item row" id="headphone">
+                        <div class="headphone__row row"></div>
+                    </div>
+                    <div class="tab-pane pane__item row" id="keyboard">
+                        <div class="keyboard__row row"></div>
+                    </div>
+                    <div class="tab-pane pane__item row" id="mouse">
+                        <div class="mouse__row row"></div>
+                    </div>
+                    <div class="tab-pane pane__item row" id="screen">
+                        <div class="screen__row row"></div>
+                    </div>
+                </div>
+
+                <div class="foru mt-5">
+                    <a href="#" class="text-info">
+                        <div class="d-flex justify-content-between">
+                            <h1>
+                                <i class="fa-solid fa-heart"></i>
+                                Dành cho bạn
+                            </h1>
+                            <a href="#">Xem tất cả</a>
+                        </div>
+                    </a>
+
+                    <div id="foru" class="d-flex align-content-start flex-wrap"></div>
+                </div>
+                <div class="d-flex justify-content-center m-3">
+                    <a href="../html/filter.html" class="showMore border rounded-4 p-3">Xem thêm sản phẩm</a>
+                </div>
+            </div>
+        </div>
+        <div class="sitema p-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-2">
+                    <div><a href="../html/index.html">Trang Chủ</a></div>
+                    <a href="../html/signup.html">Đăng ký</a>
+                    <div> <a href="../html/login.html">Đăng nhập</a></div>
+                    <div> <a href="../html//identify.html">Xác thực Tài Khoản</a> </div>
+                </div>
+                <div class="col-sm-2 ">
+                    <div> <a href="../html/cart.html">Giỏ Hàng</a> </div>
+                    <div><a href="../html/filter.html">Sản phẩm</a></div>
+                    <a href="../html/detailProduct.html">Chi tiết sản phảm</a>
+                </div>
+                <div class="col-sm-2 ">
+                    <div> <a href="../html/aboutUs.html">About Us</a> </div>
+                    <a href="../html/aboutUs.html#contact">Liên hệ</a>
+                </div>
+            </div>
+        </div>
+        <footer class="border bg-light p-3">
+            <div class="r">&copy;2024 DrawTech - Trần Thành Tài - 22673121 - SDT: 0899655446 - Địa chỉ: 12 Nguyễn Văn
+                Bảo, Phường 4, Gò Vấp, Tp Hồ Chí Minh</div>
+            <div class="p-3">
+                <a class="me-1" href="https://www.facebook.com/thanhtai.tran.127201">
+                    <i class="fa-brands fa-facebook" style="font-size: 2.4rem;"></i>
+                </a>
+                <a class="me-1" href="https://www.instagram.com/tkanh_tai/">
+                    <i class="fa-brands fa-square-instagram" style="font-size: 2.4rem;"></i>
+                </a>
+                <a class="me-1" href="">
+                    <img src="../img/myInfo/contact/logo_zalo.png" alt=""
+                        style="width: 24px;position: relative;top: -6px;">
+                </a>
+            </div>
+        </footer>
+    </div>
+
+</body>
+<script src="../js/main.js"></script>
+
+</html>

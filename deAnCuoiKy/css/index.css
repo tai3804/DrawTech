@@ -1,0 +1,13 @@
+.content-nav {
+    border-right: 1px solid var(--light-border-color);
+    padding: 2px 8px !important;
+}
+
+.content__main {
+    width: 99%;
+}
+
+.content-nav:hover {
+    color: var(--black) !important;
+    background-color: white;
+}

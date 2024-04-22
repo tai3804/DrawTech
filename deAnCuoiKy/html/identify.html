@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrawTech - Lấy lại mật khẩu</title>
+    <link rel="icon" href="../img/header/icon.png" type="logo">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../bootstrap/js/jquery 3.7.1.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/base.css">
+    <script src="../js/base.js"></script>
+    <script src="../js/account.js"></script>
+    <style>
+        .main {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--behind-modal);
+        }
+
+        .container {
+            width: 356px;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="main d-flex align-items-center">
+        <div class="user__box container border bg-white">
+            <div class="border-bottom p-2">
+                <a href="../html/index.html" title="home">
+                    <i class="fa fa-home float-start p-2 text-dark" aria-hidden="true"></i>
+                </a>
+                <h1 class="text-center">Xác thực tài khoản</h1>
+            </div>
+            <form class="p-3">
+                <div class="form-group mb-2" id="user">
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" class="form-control p-2 user__in" name="Tên đăng nhập" required>
+                    <div class="user__mess"></div>
+                </div>
+                <button type="button" class="form-control btn btn-dark" onclick="check()">Xác nhận</button>
+                <div class="d-flex justify-content-between">
+                    <a href="../html/signup.html">Đăng ký</a>
+                    <a href="../html/login.html">Đăng Nhập</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="identify__box hide container border bg-white">
+            <div class="border-bottom p-2">
+                <a title="Trở về" href="#" class="back">
+                    <i class="fa-solid fa-chevron-left float-start pt-3 text-dark"></i>
+                </a>
+                <h1 class="text-center">Xác thực tài khoản</h1>
+            </div>
+            <form class="p-3">
+                <div class="form-group mb-2" id="identify-code">
+                    <label for="identify-code">Nhập mã xác thực</label>
+                    <input type="text" class="form-control p-2 identify-code__in" name="Mã xác thực" required>
+                </div>
+                <button type="button" class="form-control btn btn-dark col" onclick="checkIdentifyCode(code)">Xác
+                    nhận</button>
+                <a href="#" class="col" onclick="sendCode()">Gửi lại mã xác thực</a>
+                <div class="d-flex justify-content-between">
+                    <a href="../html/signup.html">Đăng ký</a>
+                    <a href="../html/login.html">Đăng Nhập</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="reset-password hide container border bg-white">
+            <div class="border-bottom p-2">
+                <a title="Trở về" href="#" class="back-identify">
+                    <i class="fa-solid fa-chevron-left float-start pt-3 text-dark"></i>
+                </a>
+                <h1 class="text-center">Xác thực tài khoản</h1>
+            </div>
+            <form class="p-3">
+                <div class="form-group mb-2" id="identify-code">
+                    <label for="pass">Nhập mật khẩu mới</label>
+                    <input type="password" class="form-control p-2 pass__in" name="Mật khẩu" required>
+                    <div class="pass__mess"></div>
+                </div>
+                <div class="form-group mb-2" id="identify-code">
+                    <label for="pass">Nhập lại mật khẩu</label>
+                    <input type="password" class="form-control p-2 re-pass__in" name="Mật khẩu" required>
+                    <div class="re-pass__mess"></div>
+                </div>
+
+                <button type="button" class="form-control btn btn-dark col" onclick="checkResetPass()">Xác
+                    nhận</button>
+                <div class="d-flex justify-content-between">
+                    <a href="../html/signup.html">Đăng ký</a>
+                    <a href="../html/login.html">Đăng Nhập</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    const user = $('.user__in');
+    const userMess = $('.user__mess');
+
+    const userRegex = /^[a-zA-Z0-9]{6,}$/;
+    const identifyCodeIn = $('.identify-code__in');
+
+    const pass = $('.pass__in');
+    const rePass = $('.re-pass__in');
+
+    const passMess = $('.pass__mess');
+    const rePassMess = $('.re-pass__mess');
+
+    var code = 1;
+    $('.back').click(function () {
+        console.log('click');
+        $('.user__box').show()
+        $('.identify__box').hide()
+
+    });
+
+    $('.back-identify').click(function () {
+        console.log('click');
+        $('.identify__box').show()
+        $('.reset-password').hide()
+    });
+
+    function resetPass(username, password) {
+        for (let acc in accountList) {
+            if (accountList[acc].username == username) {
+                accountList[acc].password = password;
+            }
+            localStorage.setItem('accountList', JSON.stringify(accountList));
+        }
+        return false;
+    }
+
+    function sendCode() {
+        var code = Math.floor(Math.random() * 10000);
+        alert(`Mã xác thực của bạn là: ${code}`);
+        return code;
+    }
+
+    function check() {
+        event.preventDefault();
+
+
+
+        if (!checkRong(userMess, user)) {
+            return false;
+        } else {
+            userMess.html('');
+        }
+
+        for (let acc in accountList) {
+            if (accountList[acc].username == user.val()) {
+                code = sendCode();
+                $('.user__box').hide();
+                $('.identify__box').show();
+                return true;
+            }
+        }
+        userMess.html('<sup class="text-danger">Tên đăng nhập không tồn tại!</sup>');
+    }
+
+    function checkIdentifyCode(code) {
+        if (identifyCodeIn.val() == code) {
+
+            $('.identify__box').hide();
+            $('.reset-password').show();
+        } else {
+            alert('Mã xác thực không đúng!');
+        }
+    }
+
+
+    function checkResetPass() {
+        if (!checkRong(passMess, pass)) {
+        } else {
+            passMess.html('');
+        }
+        if (!checkRong(rePassMess, rePass));
+        else if (pass.val() != rePass.val()) {
+            $('.re-pass__mess').html('<sup class="text-danger">Mật khẩu không trùng khớp!</sup>');
+            return false;
+        } else {
+            $('.re-pass__mess').html('');
+        }
+        resetPass(user.val(), pass.val());
+        alert('Đổi mật khẩu thành công!');
+        window.location.href = '../html/login.html';
+    }
+</script>
+
+</html>
